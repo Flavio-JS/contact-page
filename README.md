@@ -8,9 +8,10 @@ O desafio consiste em criar uma página de login responsiva, seguindo o layout f
 
 ## Tecnologias
 
-- Next
-- TS
-- Styled Components
+- [Next](https://nextjs.org/docs/getting-started)
+- [TS](https://www.typescriptlang.org/docs/)
+- [Styled Components](https://styled-components.com/docs)
+- [Storybook](https://storybook.js.org/docs/react/get-started/install/)
 
 ## Como executar o projeto
 
