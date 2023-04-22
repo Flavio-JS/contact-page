@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Title } from "./Title";
+
 export default {
   title: "Components/Title",
   component: Title,
@@ -45,7 +46,7 @@ export const ChangeWeight: StoryObj<typeof Title> = {
   },
 };
 
-export const textTransformUppercase: StoryObj<typeof Title> = {
+export const TextTransformUppercase: StoryObj<typeof Title> = {
   args: {
     children: "text Transform Uppercase",
     fontSize: 32,
@@ -54,7 +55,7 @@ export const textTransformUppercase: StoryObj<typeof Title> = {
   },
 };
 
-export const textTransformCapitalize: StoryObj<typeof Title> = {
+export const TextTransformCapitalize: StoryObj<typeof Title> = {
   args: {
     children: "text Transform Capitalize",
     fontSize: 32,
@@ -63,7 +64,7 @@ export const textTransformCapitalize: StoryObj<typeof Title> = {
   },
 };
 
-export const textTransformLowercase: StoryObj<typeof Title> = {
+export const TextTransformLowercase: StoryObj<typeof Title> = {
   args: {
     children: "text Transform Lowercase",
     fontSize: 32,
