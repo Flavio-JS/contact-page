@@ -1,10 +1,11 @@
 import { NextPage } from "next";
+import { Title } from "../components/Title/Title";
 
 const HomePage: NextPage = () => {
   return (
-    <div>
-      <p>PÁGINA EXEMPLO</p>
-    </div>
+    <>
+      <Title textTransform="capitalize">Página exemplo</Title>
+    </>
   );
 };
 
