@@ -1,6 +1,6 @@
 import { NextPage } from "next";
+import { BaseButton } from "../components/BaseButton/BaseButton";
 import { Form } from "../components/Form/Form";
-import { Input } from "../components/Input/Input";
 import { Title } from "../components/Title/Title";
 
 const HomePage: NextPage = () => {
@@ -14,8 +14,8 @@ const HomePage: NextPage = () => {
       <Form
         onSubmitFn={onSubmit}
         inputs={[
-          <Input key="id" type="text" name="id" />,
-          <Input key="password" type="password" name="senha" />,
+          { type: "text", name: "id", padding: "10px" },
+          { type: "password", name: "senha", padding: "10px" },
         ]}
       />
     </>
