@@ -10,8 +10,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: var(--plus-jakarta-sans), sans-serif;
+    font-family: var(--roboto), sans-serif;
+    color: #E1E1E6;
   }
+
 `;
 
 export { GlobalStyle };
