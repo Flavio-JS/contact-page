@@ -1,12 +1,11 @@
-import { Plus_Jakarta_Sans } from "@next/font/google";
+import { Roboto } from "@next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { useState } from "react";
+import { GlobalStyle } from "../styles/Global.styles";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--plus-jakarta-sans",
-  weight: "variable",
-  display: "swap",
+const roboto = Roboto({
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
@@ -25,9 +24,10 @@ const App = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <style jsx global>{`
         :root {
-          --plus-jakarta-sans: ${plusJakartaSans.style.fontFamily};
+          --roboto: ${roboto.style.fontFamily};
         }
       `}</style>
+      <GlobalStyle />
       <Component {...pageProps} />
     </QueryClientProvider>
   );
