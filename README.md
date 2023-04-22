@@ -24,7 +24,13 @@ O desafio consiste em criar uma página de login responsiva, seguindo o layout f
 
 ## Padrão criação de branchs
 
+# Nomenclatura criação de componente
 
+- `feat/(nome do frame do figma que corresponde ao componente)`
+
+![image](https://user-images.githubusercontent.com/106037619/233790761-d281d1a4-92e6-473e-9ad3-ad10fa3ebd07.png)
+
+- Como visto na imagem de exemplo acima, o `Frame15` corresponde ao componente `Barra de Pesquisa`. A branch fica com a seguinte nomenclatura `feat/frame15`
 
 ### Autor
 
