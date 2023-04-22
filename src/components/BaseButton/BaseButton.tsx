@@ -1,4 +1,9 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ReactNode,
+  RefObject,
+} from "react";
 import { BaseButtonWrapper } from "./BaseButton.styles";
 
 interface IBaseButtonProps
@@ -12,10 +17,13 @@ interface IBaseButtonProps
   endIcon?: ReactNode;
   color?: string;
   variant: "filled" | "text" | "textWithUnderline" | "outlined";
+  ref?:
+    | ((instance: HTMLButtonElement | null) => void)
+    | RefObject<HTMLButtonElement>
+    | null;
 }
 
-function BaseButton({
-  ref,
+const BaseButton = ({
   height,
   width,
   startIcon,
@@ -23,13 +31,14 @@ function BaseButton({
   color = "#00B2BF",
   variant = "filled",
   ...props
-}: IBaseButtonProps) {
+}: IBaseButtonProps) => {
   return (
     <BaseButtonWrapper
       height={height}
       width={width}
       color={color}
       variant={variant}
+      ref={props.ref}
       {...props}
     >
       {startIcon}
@@ -37,6 +46,6 @@ function BaseButton({
       {endIcon}
     </BaseButtonWrapper>
   );
-}
+};
 
-export default BaseButton;
+export { BaseButton };

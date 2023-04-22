@@ -10,7 +10,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -31,4 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </QueryClientProvider>
   );
-}
+};
+
+export default App;

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import { useMutationGetPosts } from "../../api/services/jsonPlaceholder/Posts/PostsService.hooks";
-import BaseButton from "../../components/BaseButton/BaseButton";
+import { BaseButton } from "../../components/BaseButton/BaseButton";
 
 const ExamplePage: NextPage = () => {
   const {

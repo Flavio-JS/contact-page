@@ -1,59 +1,23 @@
-### Branch Pattern
+# Projeto #boraCodar - Desafio 16
 
-Here we will explain how the project branches are divided into core branches(which should not have a branch name change), for example:
+Este é o meu projeto para o 16º desafio do projeto #boraCodar da Rocketseat.
 
-- **_Development:_** Regarding the development environment
-- **_Homologation:_** Regarding the homologation environment
-- **_Production:_** Regarding the production environment
+## Desafio
 
-And when creating a branch for a feature development, please follow this name base:\
-There will be two types of branch naming
+O desafio consiste em criar uma página de login responsiva, seguindo o layout fornecido pela Rocketseat.
 
-- **_Feature Type:_** When is a feature, you will have to follow the naming parameter :
+## Tecnologias
 
-```
-features/####-description
-```
+- Next
+- TS
+- Styled Components
 
-- **_Bug Type:_** When is a bug, you will have to follow the naming parameter :
+## Como executar o projeto
 
-```
-fix/####-description
-```
+1. Clone este repositório em sua máquina local
+2. Navegue até a raiz do projeto
+3. Execute o comando `start:build` (os scripts estão no arquivo package.json) no terminal 
 
-- **_####:_** is the task number
-- **_description:_** A short description of the functionality
+### Autor
 
-### Commit Pattern
-
-All commits must have the following initials before the description of the change:
-
-- **_Feat:_** To introduce new features
-
-```
-feat:description
-```
-
-- **_Fix:_** To fix bugs
-
-```
-fix:description
-```
-
-- **_Chore:_** To make general changes
-
-```
-chore:description
-```
-
-- **_CI:_** To work on continuous integration/continuous deployment
-
-```
-ci:description
-```
-
-- **_Refactor:_** To improve existing source code
-
-```
-refactor:description
-```
+Flávio JS - [Meu perfil no GitHub](https://github.com/Flavio-JS)

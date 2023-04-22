@@ -18,4 +18,4 @@ const ChevronLeftIcon = ({ ...props }: SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default ChevronLeftIcon;
+export { ChevronLeftIcon };

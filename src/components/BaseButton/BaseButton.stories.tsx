@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import ChevronLeftIcon from "../Icons/ChevronLeftIcon";
-import BaseButton from "./BaseButton";
+import { ChevronLeftIcon } from "../Icons/ChevronLeftIcon";
+import { BaseButton } from "./BaseButton";
 
 export default {
   title: "Components/TrinusButton",

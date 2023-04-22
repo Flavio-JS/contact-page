@@ -6,6 +6,7 @@ import { GlobalStyle } from "../src/styles/Global.styles";
 import { withNextFont } from "./decorators/withNextFont";
 import { withQueryClient } from "./decorators/withClientProvider";
 import { initialize, mswDecorator } from "msw-storybook-addon";
+import { DefaultTheme } from "../src/styles/theme";
 
 initialize();
 
@@ -16,6 +17,7 @@ const preview: Preview = {
     withThemeFromJSXProvider({
       defaultTheme: "default",
       Provider: ThemeProvider,
+      themes: DefaultTheme,
       GlobalStyles: GlobalStyle,
     }),
     mswDecorator,

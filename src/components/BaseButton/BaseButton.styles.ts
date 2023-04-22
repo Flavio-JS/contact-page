@@ -27,7 +27,7 @@ export const BaseButtonWrapper = styled.button<IBaseButtonWrapperProps>`
     font-size: 16px;
     cursor: pointer;
 
-    ${variant == "filled" &&
+    ${variant === "filled" &&
     css`
       background-color: ${disabled ? "gray" : color};
       color: white;
@@ -36,7 +36,7 @@ export const BaseButtonWrapper = styled.button<IBaseButtonWrapperProps>`
       padding: 12px 76px;
     `}
 
-    ${variant == "outlined" &&
+    ${variant === "outlined" &&
     css`
       background-color: transparent;
       color: ${disabled ? "gray" : color};
@@ -45,16 +45,16 @@ export const BaseButtonWrapper = styled.button<IBaseButtonWrapperProps>`
       padding: 12px 76px;
     `}
 
-    ${variant == "textWithUnderline" &&
+    ${variant === "textWithUnderline" &&
     css`
       background-color: transparent;
       color: ${disabled ? "gray" : color};
       outline: none;
       padding: 0;
-      text-decoration: underline ${disabled ? "gray" : color}; ;
+      text-decoration: underline ${disabled ? "gray" : color};
     `}
 
-    ${variant == "text" &&
+    ${variant === "text" &&
     css`
       background-color: transparent;
       color: ${disabled ? "gray" : color};

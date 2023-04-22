@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang={"pt-br"}>
+      <Html lang="pt-br">
         <Head />
         <body>
           <Main />

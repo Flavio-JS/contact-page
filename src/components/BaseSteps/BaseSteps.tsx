@@ -10,12 +10,12 @@ interface IBaseStepsProps {
   vertical?: boolean;
 }
 
-function BaseSteps({
+const BaseSteps = ({
   quantitySteps,
   currentStep,
   vertical = false,
   ...props
-}: IBaseStepsProps) {
+}: IBaseStepsProps) => {
   return (
     <BaseStepsWrapper vertical={vertical} {...props}>
       {Array.from({ length: quantitySteps }, (_, i) => i + 1).map((step) => (
@@ -23,11 +23,11 @@ function BaseSteps({
           <BaseStepNumberCircle currentStep={currentStep} stepKey={step}>
             {step}
           </BaseStepNumberCircle>
-          {step != quantitySteps && <SplitBar vertical={vertical}></SplitBar>}
+          {step !== quantitySteps && <SplitBar vertical={vertical} />}
         </div>
       ))}
     </BaseStepsWrapper>
   );
-}
+};
 
-export default BaseSteps;
+export { BaseSteps };

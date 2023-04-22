@@ -10,7 +10,7 @@ const HomePage: NextPage = () => {
     useGetCommentsByPostId({
       postId: Number(id),
       enabled: router.isReady,
-      getCommentsId: `getCommentsId${id}`,
+      getCommentsId: `getCommentsId${typeof id === "string" ? id : ""}`,
     });
   return (
     <div>
