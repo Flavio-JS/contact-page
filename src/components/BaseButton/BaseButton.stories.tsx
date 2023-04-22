@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ChevronLeftIcon } from "../Icons/ChevronLeftIcon";
+import { TrashIcon } from "../Icons/Trash";
 import { BaseButton } from "./BaseButton";
 
 export default {
@@ -64,22 +64,22 @@ export const WithoutIcon: StoryObj<typeof BaseButton> = {
 
 export const WithStartIcon: StoryObj<typeof BaseButton> = {
   args: {
-    startIcon: <ChevronLeftIcon width={18} height={18} />,
+    startIcon: <TrashIcon width={18} height={18} />,
     children: "Com ícone inicial",
   },
 };
 
 export const WithEndIcon: StoryObj<typeof BaseButton> = {
   args: {
-    endIcon: <ChevronLeftIcon width={18} height={18} />,
+    endIcon: <TrashIcon width={18} height={18} />,
     children: "Com ícone final",
   },
 };
 
 export const WithStartAndEndIcon: StoryObj<typeof BaseButton> = {
   args: {
-    startIcon: <ChevronLeftIcon width={18} height={18} />,
-    endIcon: <ChevronLeftIcon width={18} height={18} />,
+    startIcon: <TrashIcon width={18} height={18} />,
+    endIcon: <TrashIcon width={18} height={18} />,
     children: "Com os ícones",
   },
 };
