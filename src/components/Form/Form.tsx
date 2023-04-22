@@ -5,15 +5,21 @@ import * as S from "./Form.styles";
 interface IForm {
   inputs: IInput[];
   onSubmitFn: SubmitHandler<Record<string, unknown>>;
-  submitBtn?: JSX.Element;
   gap?: number;
+  width?: number;
+  height?: number;
 }
 
-const Form = ({ inputs, onSubmitFn, submitBtn, gap }: IForm) => {
+const Form = ({ inputs, onSubmitFn, gap, width, height }: IForm) => {
   const methods = useForm<Record<string, unknown>>();
 
   return (
-    <S.FormWrapper gap={gap} onSubmit={methods.handleSubmit(onSubmitFn)}>
+    <S.FormWrapper
+      gap={gap}
+      onSubmit={methods.handleSubmit(onSubmitFn)}
+      width={width}
+      height={height}
+    >
       <FormProvider {...methods}>
         {inputs.map((input) => (
           <Input
@@ -22,13 +28,14 @@ const Form = ({ inputs, onSubmitFn, submitBtn, gap }: IForm) => {
             name={input.name}
             label={input.label}
             height={input.height}
-            width={input.width}
+            maxWidth={input.maxWidth}
             margin={input.margin}
             padding={input.padding}
+            startIcon={input.startIcon}
+            endIcon={input.endIcon}
             placeholder={input.placeholder}
           />
         ))}
-        {submitBtn ? submitBtn : <button>Enviar</button>}
       </FormProvider>
     </S.FormWrapper>
   );

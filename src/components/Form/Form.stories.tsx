@@ -17,9 +17,8 @@ export default {
 export const Default: StoryObj<typeof Form> = {
   args: {
     inputs: [
-      { type: "text", name: "id" },
-      { type: "password", name: "password" },
+      { type: "text", name: "id", placeholder: "text" },
+      { type: "password", name: "password", placeholder: "password" },
     ],
-    submitBtn: <button>ENVIAR</button>,
   },
 };

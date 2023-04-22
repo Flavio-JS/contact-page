@@ -17,7 +17,13 @@ O desafio consiste em criar uma página de login responsiva, seguindo o layout f
 
 1. Clone este repositório em sua máquina local
 2. Navegue até a raiz do projeto
-3. Execute o comando `start:build` (os scripts estão no arquivo package.json) no terminal 
+3. Execute o comando `npm run start:build` no terminal 
+
+## Como executar o StoryBook
+
+1. Clone este repositório em sua máquina local
+2. Navegue até a raiz do projeto
+3. Execute o comando `npm run storybook` no terminal 
 
 ## Figma design
 

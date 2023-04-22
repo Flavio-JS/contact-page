@@ -2,15 +2,17 @@ import styled, { css } from "styled-components";
 
 interface IFormWrapperProps {
   gap?: number;
+  width?: number;
+  height?: number;
 }
 export const FormWrapper = styled.form<IFormWrapperProps>`
-  ${({ gap }) => css`
+  ${({ gap, width, height }) => css`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
+    width: ${width ? `${width}px` : "fit-content"};
+    height: ${height ? `${height}px` : "fit-content"};
     gap: ${gap ? `${gap}px` : "16px"};
 
     button {
