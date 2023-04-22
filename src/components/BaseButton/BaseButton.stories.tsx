@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TrashIcon } from "../Icons/Trash";
+import { TrashIcon } from "../Icons/Trash/Trash";
 import { BaseButton } from "./BaseButton";
 
 export default {
-  title: "Components/TrinusButton",
+  title: "Components/BaseButton",
   component: BaseButton,
   argTypes: {
     height: {
@@ -21,7 +21,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Componente de botão",
+        component: "Componente BaseButton",
       },
     },
   },
