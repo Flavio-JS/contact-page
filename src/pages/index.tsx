@@ -6,9 +6,11 @@ import * as S from "./index.styles";
 const HomePage: NextPage = () => {
   // eslint-disable-next-line no-console
   const onSearch = (data: Record<string, unknown>) => console.log(data);
-
+  // eslint-disable-next-line no-console
   const handleAddClick = () => console.log("add");
+  // eslint-disable-next-line no-console
   const handleEditClick = () => console.log("edit");
+  // eslint-disable-next-line no-console
   const handleDeleteClick = () => console.log("delete");
 
   return (
