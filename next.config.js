@@ -8,6 +8,9 @@ const nextConfig = {
     styledComponents: true,
   },
   reactStrictMode: true,
+  images: {
+    domains: ["randomuser.me"],
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

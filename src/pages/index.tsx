@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { Form } from "../components/Form/Form";
 import { SearchIcon } from "../components/Icons/Search/Search";
+import { PersonCard } from "../components/PersonCard/PersonCard";
 import { Title } from "../components/Title/Title";
 
 const HomePage: NextPage = () => {
@@ -34,6 +35,12 @@ const HomePage: NextPage = () => {
           },
         ]}
         width={350}
+      />
+      <br />
+      <PersonCard
+        avatar="https://randomuser.me/api/portraits/women/50.jpg"
+        cell="(11) 90876-1234"
+        name="Miss Angie Stewart"
       />
     </section>
   );
