@@ -1,15 +1,20 @@
 import { NextPage } from "next";
-import { Form } from "../components/Form/Form";
-import { SearchIcon } from "../components/Icons/Search/Search";
+import { Header } from "../components/Header/Header";
 import { PersonCard } from "../components/PersonCard/PersonCard";
-import { Title } from "../components/Title/Title";
+import * as S from "../components/HomePage/index.styles";
 
 const HomePage: NextPage = () => {
   // eslint-disable-next-line no-console
-  const onSubmit = (data: Record<string, unknown>) => console.log(data);
+  const onSearch = (data: Record<string, unknown>) => console.log(data);
+  // eslint-disable-next-line no-console
+  const handleAddClick = () => console.log("add");
+  // eslint-disable-next-line no-console
+  const handleEditClick = () => console.log("edit");
+  // eslint-disable-next-line no-console
+  const handleDeleteClick = () => console.log("delete");
 
   return (
-    <section
+    <S.AppSection
       style={{
         display: "flex",
         flexDirection: "column",
@@ -17,24 +22,14 @@ const HomePage: NextPage = () => {
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#16151e",
+        backgroundColor: "#1E1E1E",
       }}
     >
-      <Title textTransform="capitalize">Meus Contatos</Title>
-      <br />
-      <Form
-        onSubmitFn={onSubmit}
-        inputs={[
-          {
-            type: "text",
-            name: "id",
-            padding: "10px",
-            maxWidth: 350,
-            startIcon: <SearchIcon />,
-            placeholder: "Busque por nome ou por dados de contato...",
-          },
-        ]}
-        width={350}
+      <Header
+        onSearch={onSearch}
+        addClick={handleAddClick}
+        deleteClick={handleDeleteClick}
+        editClick={handleEditClick}
       />
       <br />
       <PersonCard
@@ -42,7 +37,7 @@ const HomePage: NextPage = () => {
         cell="(11) 90876-1234"
         name="Miss Angie Stewart"
       />
-    </section>
+    </S.AppSection>
   );
 };
 

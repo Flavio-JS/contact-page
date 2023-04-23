@@ -11,5 +11,9 @@ export const Title = styled.h1<ITitleProps>`
     font-weight: ${fontWeight ?? 700};
     font-size: ${fontSize ?? 20}px;
     text-transform: ${textTransform ?? "none"};
+
+    :hover {
+      cursor: default;
+    }
   `}
 `;
