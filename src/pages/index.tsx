@@ -14,17 +14,7 @@ const HomePage: NextPage = () => {
   const handleDeleteClick = () => console.log("delete");
 
   return (
-    <S.AppSection
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#1E1E1E",
-      }}
-    >
+    <S.AppSection>
       <Header
         onSearch={onSearch}
         addClick={handleAddClick}
