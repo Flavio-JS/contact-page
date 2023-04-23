@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { Header } from "../components/Header/Header";
 import { PersonCard } from "../components/PersonCard/PersonCard";
-import * as S from "./index.styles";
+import * as S from "../components/HomePage/index.styles";
 
 const HomePage: NextPage = () => {
   // eslint-disable-next-line no-console
