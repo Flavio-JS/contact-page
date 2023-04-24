@@ -78,7 +78,7 @@ const Header = ({
               name: "avatar",
               padding: "10px",
               maxWidth: 350,
-              placeholder: "link da imagem (em branco para não ter avatar)",
+              placeholder: "url da imagem",
             },
           ]}
           customBtn={
