@@ -1,13 +1,27 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import nookies from "nookies";
+import { ContactList } from "../components/ContactList/ContactList";
+import { IContact } from "../components/ContactList/ContactList.types";
 import { Header } from "../components/Header/Header";
-import { PersonCard } from "../components/PersonCard/PersonCard";
 import * as S from "../components/HomePage/index.styles";
 
-const HomePage: NextPage = () => {
+type HomePageProps = {
+  contactsData: IContact[];
+};
+
+const HomePage: NextPage<HomePageProps> = ({ contactsData }) => {
   // eslint-disable-next-line no-console
   const onSearch = (data: Record<string, unknown>) => console.log(data);
   // eslint-disable-next-line no-console
-  const handleAddClick = () => console.log("add");
+  const handleAddClick = () => {
+    const newContact = {
+      avatar: "https://avatars.githubusercontent.com/u/106037619?s=96&v=4",
+      name: "Flávio Filho",
+      cell: "(62)987654321",
+    };
+    const newContactsData = [...contactsData, newContact];
+    nookies.set(null, "contatos", JSON.stringify(newContactsData));
+  };
   // eslint-disable-next-line no-console
   const handleEditClick = () => console.log("edit");
   // eslint-disable-next-line no-console
@@ -21,14 +35,29 @@ const HomePage: NextPage = () => {
         deleteClick={handleDeleteClick}
         editClick={handleEditClick}
       />
-      <br />
-      <PersonCard
-        avatar="https://randomuser.me/api/portraits/women/50.jpg"
-        cell="(11) 90876-1234"
-        name="Miss Angie Stewart"
-      />
+      <ContactList contactsData={contactsData} />
     </S.AppSection>
   );
 };
 
 export default HomePage;
+
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async (
+  context
+  // eslint-disable-next-line @typescript-eslint/require-await
+) => {
+  const cookies = nookies.get(context);
+  const contactsStored = cookies.contatos;
+  let contactsData: IContact[] = [];
+
+  if (contactsStored) {
+    contactsData = JSON.parse(contactsStored) as IContact[];
+    contactsData.sort((a, b) => a.name.localeCompare(b.name));
+  } else {
+    nookies.set(context, "contatos", JSON.stringify([]));
+  }
+
+  return {
+    props: { contactsData },
+  };
+};
