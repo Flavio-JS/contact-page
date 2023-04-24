@@ -16,12 +16,6 @@ export const FormWrapper = styled.form<IFormWrapperProps>`
     gap: ${gap ? `${gap}px` : "16px"};
 
     button {
-      width: 100%;
-      border: none;
-      padding: 8px;
-      border-radius: 8px;
-      background-color: #16151e;
-
       :hover {
         cursor: pointer;
       }

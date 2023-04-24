@@ -3,8 +3,9 @@ import styled, { css } from "styled-components";
 export const ContactListWrapper = styled.div`
   background-color: #1a1924;
   width: 100%;
-  height: 50vh;
   max-width: 430px;
+  height: 100%;
+  max-height: 50vh;
   padding: 40px;
   gap: 52px;
   overflow-y: scroll;

@@ -78,6 +78,7 @@ const ContactList = ({ contactsData }: IContactList) => {
                     <PersonCard
                       key={`${contactData.name}${contactData.cell}`}
                       avatar={contactData.avatar}
+                      avatarColor={gerarCorHexAleatoria()}
                       cell={contactData.cell}
                       name={contactData.name}
                     />

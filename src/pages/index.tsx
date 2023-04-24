@@ -1,39 +1,51 @@
 import { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
+import { useState } from "react";
 import { ContactList } from "../components/ContactList/ContactList";
 import { IContact } from "../components/ContactList/ContactList.types";
 import { Header } from "../components/Header/Header";
 import * as S from "../components/HomePage/index.styles";
 
 type HomePageProps = {
-  contactsData: IContact[];
+  contactsCookieData: IContact[];
 };
 
-const HomePage: NextPage<HomePageProps> = ({ contactsData }) => {
+const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
+  const [headerState, setHeaderState] = useState<
+    "search" | "add" | "edit" | "delete"
+  >("search");
+  const [contactsData, setContactsData] =
+    useState<IContact[]>(contactsCookieData);
   // eslint-disable-next-line no-console
   const onSearch = (data: Record<string, unknown>) => console.log(data);
   // eslint-disable-next-line no-console
-  const handleAddClick = () => {
+  const onAdd = (data: Record<string, unknown>) => {
     const newContact = {
-      avatar: "https://avatars.githubusercontent.com/u/106037619?s=96&v=4",
-      name: "Flávio Filho",
-      cell: "(62)987654321",
+      avatar: data.avatar as string,
+      name: data.name as string,
+      cell: data.cell as string,
     };
-    const newContactsData = [...contactsData, newContact];
+    const newContactsData = [...contactsCookieData, newContact];
     nookies.set(null, "contatos", JSON.stringify(newContactsData));
+    setContactsData(newContactsData);
+    setHeaderState("search");
   };
-  // eslint-disable-next-line no-console
-  const handleEditClick = () => console.log("edit");
-  // eslint-disable-next-line no-console
-  const handleDeleteClick = () => console.log("delete");
+
+  const handleAddClick = () => setHeaderState("add");
+  const handleEditClick = () => setHeaderState("edit");
+  const handleDeleteClick = () => setHeaderState("delete");
+  const handleSearchClick = () => setHeaderState("search");
 
   return (
     <S.AppSection>
       <Header
         onSearch={onSearch}
+        onAdd={onAdd}
         addClick={handleAddClick}
         deleteClick={handleDeleteClick}
         editClick={handleEditClick}
+        searchClick={handleSearchClick}
+        state={headerState}
       />
       <ContactList contactsData={contactsData} />
     </S.AppSection>
@@ -48,16 +60,16 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async (
 ) => {
   const cookies = nookies.get(context);
   const contactsStored = cookies.contatos;
-  let contactsData: IContact[] = [];
+  let contactsCookieData: IContact[] = [];
 
   if (contactsStored) {
-    contactsData = JSON.parse(contactsStored) as IContact[];
-    contactsData.sort((a, b) => a.name.localeCompare(b.name));
+    contactsCookieData = JSON.parse(contactsStored) as IContact[];
+    contactsCookieData.sort((a, b) => a.name.localeCompare(b.name));
   } else {
     nookies.set(context, "contatos", JSON.stringify([]));
   }
 
   return {
-    props: { contactsData },
+    props: { contactsCookieData },
   };
 };

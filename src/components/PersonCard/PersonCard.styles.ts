@@ -36,6 +36,21 @@ export const PersonCardImg = styled.div<IPersonCardImgProps>`
   `}
 `;
 
+interface IPersonNoImg {
+  avatarColor: string;
+}
+export const PersonNoImg = styled.div<IPersonNoImg>`
+  ${({ avatarColor }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${avatarColor};
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  `}
+`;
+
 export const PersonCardInfo = styled.div`
   max-width: 127px;
 `;

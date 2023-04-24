@@ -9,3 +9,8 @@ export const AppSection = styled.section`
   align-items: center;
   background-color: #1e1e1e;
 `;
+
+export const AppWrapper = styled.div`
+  max-width: 430px;
+  max-height: 629px;
+`;

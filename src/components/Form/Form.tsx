@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { IInput, Input } from "../Input/Input";
 import * as S from "./Form.styles";
@@ -8,9 +9,10 @@ interface IForm {
   gap?: number;
   width?: number;
   height?: number;
+  customBtn?: ReactNode;
 }
 
-const Form = ({ inputs, onSubmitFn, gap, width, height }: IForm) => {
+const Form = ({ inputs, onSubmitFn, gap, width, height, customBtn }: IForm) => {
   const methods = useForm<Record<string, unknown>>();
 
   return (
@@ -36,6 +38,7 @@ const Form = ({ inputs, onSubmitFn, gap, width, height }: IForm) => {
             placeholder={input.placeholder}
           />
         ))}
+        {customBtn && customBtn}
       </FormProvider>
     </S.FormWrapper>
   );
