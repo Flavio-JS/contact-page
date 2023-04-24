@@ -11,11 +11,11 @@ type HomePageProps = {
 };
 
 const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
+  let contactsCookie = contactsCookieData;
   const [headerState, setHeaderState] = useState<
     "search" | "add" | "edit" | "delete"
   >("search");
-  const [contactsData, setContactsData] =
-    useState<IContact[]>(contactsCookieData);
+  const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
   // eslint-disable-next-line no-console
   const onSearch = (data: Record<string, unknown>) => console.log(data);
   // eslint-disable-next-line no-console
@@ -25,7 +25,8 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
       name: data.name as string,
       cell: data.cell as string,
     };
-    const newContactsData = [...contactsCookieData, newContact];
+    contactsCookie = JSON.parse(nookies.get().contatos) as IContact[];
+    const newContactsData = [...contactsCookie, newContact];
     nookies.set(null, "contatos", JSON.stringify(newContactsData));
     setContactsData(newContactsData);
     setHeaderState("search");
@@ -64,7 +65,6 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async (
 
   if (contactsStored) {
     contactsCookieData = JSON.parse(contactsStored) as IContact[];
-    contactsCookieData.sort((a, b) => a.name.localeCompare(b.name));
   } else {
     nookies.set(context, "contatos", JSON.stringify([]));
   }

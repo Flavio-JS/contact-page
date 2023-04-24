@@ -22,63 +22,40 @@ const ContactList = ({ contactsData }: IContactList) => {
       ]
     : [];
 
-  function gerarCorHexAleatoria() {
-    const corIndesejada = "#E1E1E6";
-    const limiteDiferenca = 20;
+  function returnRandomBgColor(index: number) {
+    const bgColor = [
+      "#8C8CBA",
+      "#0088B3",
+      "#07847E",
+      "#633BBC",
+      "#9A00B3",
+      "#B38C00",
+    ];
 
-    let cor = "";
-    let diferencaRGB = 0;
+    if (index > bgColor.length) {
+      return bgColor[index % 6];
+    }
 
-    do {
-      // Gerar um valor hexadecimal aleatório para cada componente RGB
-      const red = Math.floor(Math.random() * 256)
-        .toString(16)
-        .padStart(2, "0");
-      const green = Math.floor(Math.random() * 256)
-        .toString(16)
-        .padStart(2, "0");
-      const blue = Math.floor(Math.random() * 256)
-        .toString(16)
-        .padStart(2, "0");
-
-      cor = `#${red}${green}${blue}`;
-
-      // Calcular a diferença entre cada componente RGB da cor gerada e a cor indesejada
-      diferencaRGB =
-        Math.abs(
-          parseInt(cor.slice(1, 3), 16) -
-            parseInt(corIndesejada.slice(1, 3), 16)
-        ) +
-        Math.abs(
-          parseInt(cor.slice(3, 5), 16) -
-            parseInt(corIndesejada.slice(3, 5), 16)
-        ) +
-        Math.abs(
-          parseInt(cor.slice(5, 7), 16) -
-            parseInt(corIndesejada.slice(5, 7), 16)
-        );
-    } while (diferencaRGB <= limiteDiferenca);
-
-    return cor;
+    return bgColor[index];
   }
 
   return (
     <S.ContactListWrapper>
       {initials.length > 0 && contactsData !== undefined && (
         <>
-          {initials.map((initial) => (
+          {initials.map((initial, index) => (
             <S.ContactListLetterSection key={initial}>
-              <S.ContactListLetter bgColor={gerarCorHexAleatoria()}>
+              <S.ContactListLetter bgColor={returnRandomBgColor(index)}>
                 {initial}
               </S.ContactListLetter>
               <S.ContactListContacts>
                 {contactsData
                   .filter((contact) => contact.name.startsWith(initial))
-                  .map((contactData) => (
+                  .map((contactData, contactIndex) => (
                     <PersonCard
                       key={`${contactData.name}${contactData.cell}`}
                       avatar={contactData.avatar}
-                      avatarColor={gerarCorHexAleatoria()}
+                      avatarColor={returnRandomBgColor(contactIndex + 4)}
                       cell={contactData.cell}
                       name={contactData.name}
                     />

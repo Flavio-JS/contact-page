@@ -24,7 +24,7 @@ export const PersonCardImg = styled.div<IPersonCardImgProps>`
   ${({ isClicked, transitionTime }) => css`
     width: ${isClicked ? "191px" : "48px"};
     height: ${isClicked ? "191px" : "48px"};
-
+    font-size: ${isClicked ? "64px" : "16px"};
     transition: all ${transitionTime}ms;
 
     :hover {
@@ -32,6 +32,8 @@ export const PersonCardImg = styled.div<IPersonCardImgProps>`
     }
     img {
       border-radius: 50%;
+      max-width: ${isClicked ? "191px" : "48px"};
+      max-height: ${isClicked ? "191px" : "48px"};
     }
   `}
 `;
