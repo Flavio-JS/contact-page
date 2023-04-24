@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import { useState } from "react";
 import * as S from "./PersonCard.styles";
 
@@ -8,7 +8,6 @@ interface IPersonCard {
   avatar: string;
   avatarColor: string;
 }
-// https://randomuser.me/api/ dados de user fake
 
 const PersonCard = ({ name, cell, avatar, avatarColor }: IPersonCard) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -35,13 +34,8 @@ const PersonCard = ({ name, cell, avatar, avatarColor }: IPersonCard) => {
         transitionTime={transition}
       >
         {avatar !== "" && (
-          <Image
-            alt={`Avatar ${name}`}
-            src={avatar}
-            layout="responsive"
-            width={191}
-            height={191}
-          />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img alt={`Avatar ${name}`} src={avatar} width={191} height={191} />
         )}
         {avatar === "" && (
           <S.PersonNoImg avatarColor={avatarColor}>

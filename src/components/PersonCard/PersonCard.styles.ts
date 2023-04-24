@@ -34,6 +34,7 @@ export const PersonCardImg = styled.div<IPersonCardImgProps>`
       border-radius: 50%;
       max-width: ${isClicked ? "191px" : "48px"};
       max-height: ${isClicked ? "191px" : "48px"};
+      transition: all ${transitionTime}ms;
     }
   `}
 `;

@@ -32,8 +32,8 @@ const ContactList = ({ contactsData }: IContactList) => {
       "#B38C00",
     ];
 
-    if (index > bgColor.length) {
-      return bgColor[index % 6];
+    if (index >= bgColor.length) {
+      return bgColor[index % bgColor.length];
     }
 
     return bgColor[index];
