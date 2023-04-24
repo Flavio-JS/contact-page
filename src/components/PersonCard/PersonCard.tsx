@@ -6,10 +6,11 @@ interface IPersonCard {
   name: string;
   cell: string;
   avatar: string;
+  avatarColor: string;
 }
 // https://randomuser.me/api/ dados de user fake
 
-const PersonCard = ({ name, cell, avatar }: IPersonCard) => {
+const PersonCard = ({ name, cell, avatar, avatarColor }: IPersonCard) => {
   const [isClicked, setIsClicked] = useState(false);
   const [waitImg, setWaitImg] = useState(false);
   const transition = 500;
@@ -33,13 +34,20 @@ const PersonCard = ({ name, cell, avatar }: IPersonCard) => {
         isClicked={isClicked}
         transitionTime={transition}
       >
-        <Image
-          alt={`Avatar ${name}`}
-          src={avatar}
-          layout="responsive"
-          width={191}
-          height={191}
-        />
+        {avatar !== "" && (
+          <Image
+            alt={`Avatar ${name}`}
+            src={avatar}
+            layout="responsive"
+            width={191}
+            height={191}
+          />
+        )}
+        {avatar === "" && (
+          <S.PersonNoImg avatarColor={avatarColor}>
+            {name.charAt(0)}
+          </S.PersonNoImg>
+        )}
       </S.PersonCardImg>
       {!waitImg && (
         <S.PersonCardInfo>
