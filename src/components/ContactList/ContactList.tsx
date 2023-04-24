@@ -22,9 +22,6 @@ const ContactList = ({ contactsData }: IContactList) => {
       ]
     : [];
 
-  // eslint-disable-next-line no-console
-  console.log(contactsData);
-
   function gerarCorHexAleatoria() {
     const corIndesejada = "#E1E1E6";
     const limiteDiferenca = 20;
