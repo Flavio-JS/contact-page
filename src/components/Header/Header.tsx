@@ -1,5 +1,3 @@
-import { BaseButton } from "../BaseButton/BaseButton";
-import { Form } from "../Form/Form";
 import { AddIcon } from "../Icons/Add/Add";
 import { PencilIcon } from "../Icons/Pencil/Pencil";
 import { SearchIcon } from "../Icons/Search/Search";
@@ -8,24 +6,13 @@ import { Title } from "../Title/Title";
 import * as S from "./Header.styles";
 
 interface IHeader {
-  onSearch: (data: Record<string, unknown>) => void;
-  onAdd: (data: Record<string, unknown>) => void;
   searchClick: () => void;
   addClick: () => void;
   editClick: () => void;
   deleteClick: () => void;
-  state: "search" | "add" | "edit" | "delete";
 }
 
-const Header = ({
-  onSearch,
-  onAdd,
-  addClick,
-  editClick,
-  searchClick,
-  deleteClick,
-  state = "search",
-}: IHeader) => {
+const Header = ({ addClick, editClick, searchClick, deleteClick }: IHeader) => {
   return (
     <S.HeaderWrapper>
       <S.HeaderNavBar>
@@ -37,58 +24,6 @@ const Header = ({
           <TrashIcon onClick={() => deleteClick()} />
         </S.HeaderNavBarIcons>
       </S.HeaderNavBar>
-      {state === "search" && (
-        <Form
-          onSubmitFn={onSearch}
-          inputs={[
-            {
-              type: "text",
-              name: "search",
-              padding: "10px",
-              maxWidth: 350,
-              startIcon: (
-                <BaseButton variant="text" startIcon={<SearchIcon />} />
-              ),
-              placeholder: "Busque por nome ou por dados de contato...",
-            },
-          ]}
-          width={350}
-        />
-      )}
-      {state === "add" && (
-        <Form
-          onSubmitFn={onAdd}
-          inputs={[
-            {
-              type: "text",
-              name: "name",
-              padding: "10px",
-              maxWidth: 350,
-              placeholder: "Nome do amiguinho",
-            },
-            {
-              type: "text",
-              name: "cell",
-              padding: "10px",
-              maxWidth: 350,
-              placeholder: "(99)999999999",
-            },
-            {
-              type: "text",
-              name: "avatar",
-              padding: "10px",
-              maxWidth: 350,
-              placeholder: "url da imagem",
-            },
-          ]}
-          customBtn={
-            <BaseButton variant="filled" color="#282843">
-              Salvar
-            </BaseButton>
-          }
-          width={350}
-        />
-      )}
     </S.HeaderWrapper>
   );
 };

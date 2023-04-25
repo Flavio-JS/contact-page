@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { useFormContext } from "react-hook-form";
+import { ValidationRule, useFormContext } from "react-hook-form";
 import * as S from "./Input.styles";
 
 export interface IInput {
@@ -13,6 +13,8 @@ export interface IInput {
   type: React.HTMLInputTypeAttribute;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  regex?: ValidationRule<RegExp>;
+  regexMessage?: string;
 }
 
 const Input = ({
@@ -26,9 +28,16 @@ const Input = ({
   startIcon,
   endIcon,
   type = "text",
+  regex,
+  regexMessage,
   ...rest
 }: IInput) => {
   const { register } = useFormContext();
+
+  const regexOptions = {
+    pattern: regex,
+    message: regexMessage,
+  };
 
   return (
     <S.InputWrapper
@@ -42,7 +51,7 @@ const Input = ({
         {startIcon && startIcon}
         <input
           id={name}
-          {...register(name)}
+          {...register(name, regexOptions)}
           type={type}
           placeholder={placeholder}
           autoComplete={type === "password" ? "new-password" : ""}

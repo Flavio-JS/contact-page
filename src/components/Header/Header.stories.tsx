@@ -2,8 +2,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./Header";
 
 // eslint-disable-next-line no-console
-const onSearch = (data: Record<string, unknown>) => console.log(data);
-// eslint-disable-next-line no-console
 const handleAddClick = () => console.log("add");
 // eslint-disable-next-line no-console
 const handleEditClick = () => console.log("edit");
@@ -28,6 +26,5 @@ export const Default: StoryObj<typeof Header> = {
     addClick: handleAddClick,
     deleteClick: handleEditClick,
     editClick: handleDeleteClick,
-    onSearch,
   },
 };

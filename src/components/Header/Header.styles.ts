@@ -8,7 +8,7 @@ export const HeaderWrapper = styled.header`
   background-color: #16151e;
   width: 100%;
   max-width: 430px;
-  padding: 40px;
+  padding: 40px 40px 24px 40px;
   gap: 24px;
 `;
 
