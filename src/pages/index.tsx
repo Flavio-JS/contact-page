@@ -19,7 +19,11 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     "search"
   );
   const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
-  const onSearch = (data: Record<string, unknown>) => {
+
+  interface ISearchFormData {
+    search?: string;
+  }
+  const onSearch = (data: ISearchFormData) => {
     const filteredContacts = contactsCookie.filter((contact) => {
       const searchTerm = data.search?.toString().toLowerCase();
       return contact.name?.startsWith(
@@ -30,7 +34,6 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     setContactsData(filteredContacts);
   };
 
-  // eslint-disable-next-line no-console
   const onAdd = (data: Record<string, unknown>) => {
     const newContact: IContact = {
       avatar: data.avatar as string,
