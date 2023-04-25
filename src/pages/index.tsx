@@ -19,11 +19,20 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     "search"
   );
   const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
-  // eslint-disable-next-line no-console
-  const onSearch = (data: Record<string, unknown>) => console.log(data);
+  const onSearch = (data: Record<string, unknown>) => {
+    const filteredContacts = contactsCookie.filter((contact) => {
+      const searchTerm = data.search?.toString().toLowerCase();
+      return contact.name?.startsWith(
+        (searchTerm?.charAt(0) || "").toUpperCase() +
+          (searchTerm?.slice(1) || "")
+      );
+    });
+    setContactsData(filteredContacts);
+  };
+
   // eslint-disable-next-line no-console
   const onAdd = (data: Record<string, unknown>) => {
-    const newContact = {
+    const newContact: IContact = {
       avatar: data.avatar as string,
       name: data.name as string,
       cell: data.cell as string,
@@ -38,7 +47,10 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
   const handleAddClick = () => setState("add");
   const handleEditClick = () => setState("edit");
   const handleDeleteClick = () => setState("delete");
-  const handleSearchClick = () => setState("search");
+  const handleSearchClick = () => {
+    setContactsData(contactsCookie);
+    setState("search");
+  };
 
   return (
     <S.AppSection>
