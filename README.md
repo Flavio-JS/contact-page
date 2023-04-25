@@ -4,7 +4,7 @@ Este é o meu projeto para o 16º desafio do projeto #boraCodar da Rocketseat.
 
 ## Desafio
 
-O desafio consiste em criar uma página de login responsiva, seguindo o layout fornecido pela Rocketseat.
+O desafio consiste em criar uma página de contatos, seguindo o layout fornecido pela Rocketseat, utilizando HTML, CSS e JS. Porém quis me aprofundar e estou utilizando as seguintes tecnologias:
 
 ## Tecnologias
 
