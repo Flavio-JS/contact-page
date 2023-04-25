@@ -20,5 +20,10 @@ export const FormWrapper = styled.form<IFormWrapperProps>`
         cursor: pointer;
       }
     }
+
+    span {
+      font-size: 12px;
+      color: red;
+    }
   `}
 `;

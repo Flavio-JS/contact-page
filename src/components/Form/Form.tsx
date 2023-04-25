@@ -1,5 +1,10 @@
-import { ReactNode } from "react";
-import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
+import React, { ReactNode } from "react";
+import {
+  FormProvider,
+  useForm,
+  SubmitHandler,
+  UseFormReturn,
+} from "react-hook-form";
 import { IInput, Input } from "../Input/Input";
 import * as S from "./Form.styles";
 
@@ -13,7 +18,11 @@ interface IForm {
 }
 
 const Form = ({ inputs, onSubmitFn, gap, width, height, customBtn }: IForm) => {
-  const methods = useForm<Record<string, unknown>>();
+  const methods: UseFormReturn<Record<string, unknown>> =
+    useForm<Record<string, unknown>>();
+  const {
+    formState: { errors },
+  } = methods;
 
   return (
     <S.FormWrapper
@@ -24,19 +33,25 @@ const Form = ({ inputs, onSubmitFn, gap, width, height, customBtn }: IForm) => {
     >
       <FormProvider {...methods}>
         {inputs.map((input) => (
-          <Input
-            key={input.name}
-            type={input.type}
-            name={input.name}
-            label={input.label}
-            height={input.height}
-            maxWidth={input.maxWidth}
-            margin={input.margin}
-            padding={input.padding}
-            startIcon={input.startIcon}
-            endIcon={input.endIcon}
-            placeholder={input.placeholder}
-          />
+          <React.Fragment key={input.name}>
+            <Input
+              type={input.type}
+              name={input.name}
+              label={input.label}
+              height={input.height}
+              maxWidth={input.maxWidth}
+              margin={input.margin}
+              padding={input.padding}
+              startIcon={input.startIcon}
+              endIcon={input.endIcon}
+              placeholder={input.placeholder}
+              regex={input.regex}
+              regexMessage={input.regexMessage}
+            />
+            {errors?.[input.name] && (
+              <span role="alert">{input.regexMessage}</span>
+            )}
+          </React.Fragment>
         ))}
         {customBtn && customBtn}
       </FormProvider>
