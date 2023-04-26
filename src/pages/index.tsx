@@ -78,7 +78,6 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     setDeleteMode(false);
   };
 
-  console.log(contactsCookie);
   return (
     <S.AppSection>
       <S.AppWrapper>
