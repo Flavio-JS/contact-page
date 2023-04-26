@@ -8,17 +8,15 @@ interface IContactList {
   contactsData: IContact[] | undefined;
   editMode: boolean;
   deleteMode: boolean;
-  contactsCookie: IContact[];
-  setContactsCookie: Dispatch<SetStateAction<IContact[]>>;
+  setContactsData: Dispatch<SetStateAction<IContact[]>>;
   setDeleteMode: Dispatch<SetStateAction<boolean>>;
 }
 
 const ContactList = ({
   contactsData,
+  setContactsData,
   editMode,
   deleteMode,
-  contactsCookie,
-  setContactsCookie,
   setDeleteMode,
 }: IContactList) => {
   if (contactsData)
@@ -26,12 +24,12 @@ const ContactList = ({
       a.name && b.name ? a.name.localeCompare(b.name) : 0
     );
 
-  const initials = contactsData?.filter((contact) => contact.active === true)
+  const initials = contactsData
     ? [
         ...new Set(
           contactsData
             .filter((contact) => contact.name)
-            .filter((contact) => contact.active !== false)
+
             .map((contact) => contact.name.charAt(0))
         ),
       ]
@@ -49,7 +47,6 @@ const ContactList = ({
               <S.ContactListContacts>
                 {contactsData
                   .filter((contact) => contact.name.startsWith(initial))
-                  .filter((contact) => contact.active !== false)
                   .map((contactData, contactIndex) => (
                     <PersonCard
                       key={contactData?.id}
@@ -60,8 +57,8 @@ const ContactList = ({
                       name={contactData.name}
                       editMode={editMode}
                       deleteMode={deleteMode}
-                      contactsCookie={contactsCookie}
-                      setContactsCookie={setContactsCookie}
+                      contactsData={contactsData}
+                      setContactsData={setContactsData}
                       setDeleteMode={setDeleteMode}
                     />
                   ))}

@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import nookies from "nookies";
@@ -13,8 +12,8 @@ interface IPersonCard {
   avatarColor: string;
   editMode: boolean;
   deleteMode: boolean;
-  contactsCookie: IContact[];
-  setContactsCookie: Dispatch<SetStateAction<IContact[]>>;
+  contactsData: IContact[];
+  setContactsData: Dispatch<SetStateAction<IContact[]>>;
   setDeleteMode: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -26,8 +25,8 @@ const PersonCard = ({
   avatarColor,
   editMode,
   deleteMode,
-  contactsCookie,
-  setContactsCookie,
+  contactsData,
+  setContactsData,
   setDeleteMode,
 }: IPersonCard) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -47,28 +46,19 @@ const PersonCard = ({
   };
 
   const [contactData, setContactData] = useState<IContact | undefined>(
-    contactsCookie.find((contato) => contato.id === Number(id))
+    contactsData.find((contato) => contato.id === Number(id))
   );
-
-  const cookies = nookies.get();
   useEffect(() => {
-    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setDeleteMode(false);
   }, [contactData]);
 
   const onDelet = () => {
-    const updatedContactsData: IContact[] = contactsCookie.map((contato) => {
-      if (contato.id === Number(id)) {
-        const updatedContactData: IContact = {
-          ...contato,
-          active: false,
-        };
-        setContactData(updatedContactData);
-        return updatedContactData;
-      }
-      return contato;
+    const updatedContactsData: IContact[] = contactsData.filter((contato) => {
+      return contato.id !== Number(id);
     });
 
+    setContactData(undefined);
+    setContactsData(updatedContactsData);
     nookies.set(null, "contatos", JSON.stringify(updatedContactsData));
   };
 

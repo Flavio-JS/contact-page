@@ -46,7 +46,6 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
       avatar: data.avatar as string,
       name: data.name as string,
       cell: data.cell as string,
-      active: true,
     };
     const newContactsData = [...contactsCookie, newContact];
     nookies.set(null, "contatos", JSON.stringify(newContactsData));
@@ -166,10 +165,9 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
 
         <ContactList
           contactsData={contactsData}
+          setContactsData={setContactsData}
           editMode={editMode}
           deleteMode={deleteMode}
-          contactsCookie={contactsCookie}
-          setContactsCookie={setContactsCookie}
           setDeleteMode={setDeleteMode}
         />
       </S.AppWrapper>
