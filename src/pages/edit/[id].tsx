@@ -2,12 +2,13 @@ import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BaseButton } from "../../components/BaseButton/BaseButton";
 import { IContact } from "../../components/ContactList/ContactList.types";
 import { Form } from "../../components/Form/Form";
 import { PencilIcon } from "../../components/Icons/Pencil/Pencil";
 import * as S from "../../components/PageStyles/EditPage/EditPage.styles";
+import { returnRandomBgColor } from "../../utils/ReturnRandomBgColor";
 
 type EditPageProps = {
   contactsCookieData: IContact[];
@@ -21,6 +22,12 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
     contactsCookieData.find((contato) => contato.id === Number(id))
   );
 
+  const cookies = nookies.get();
+  const [contactsCookie, setContactsCookie] = useState(contactsCookieData);
+  useEffect(() => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
+  }, [contactData]);
+
   const [isEditField, setIsEdit] = useState(false);
 
   const [editField, setEditField] = useState<"name" | "cell" | "avatar">(
@@ -28,57 +35,54 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
   );
 
   const onEditName = (data: Record<string, unknown>) => {
-    const updatedContactsData: IContact[] = contactsCookieData.map(
-      (contato) => {
-        if (contato.id === Number(id)) {
-          const updatedContactData: IContact = {
-            ...contato,
-            cell: data.cell as string,
-          };
-          setContactData(updatedContactData);
-          return updatedContactData;
-        }
-        return contato;
+    const updatedContactsData: IContact[] = contactsCookie.map((contato) => {
+      if (contato.id === Number(id)) {
+        const updatedContactData: IContact = {
+          ...contato,
+          name: data.name as string,
+        };
+        setContactData(updatedContactData);
+        return updatedContactData;
       }
-    );
+      return contato;
+    });
 
     nookies.set(null, "contatos", JSON.stringify(updatedContactsData));
+    setIsEdit(false);
   };
 
   const onEditCell = (data: Record<string, unknown>) => {
-    const updatedContactsData: IContact[] = contactsCookieData.map(
-      (contato) => {
-        if (contato.id === Number(id)) {
-          const updatedContactData: IContact = {
-            ...contato,
-            cell: data.cell as string,
-          };
-          setContactData(updatedContactData);
-          return updatedContactData;
-        }
-        return contato;
+    const updatedContactsData: IContact[] = contactsCookie.map((contato) => {
+      if (contato.id === Number(id)) {
+        const updatedContactData: IContact = {
+          ...contato,
+          cell: data.cell as string,
+        };
+        setContactData(updatedContactData);
+        return updatedContactData;
       }
-    );
+      return contato;
+    });
 
     nookies.set(null, "contatos", JSON.stringify(updatedContactsData));
+    setIsEdit(false);
   };
 
   const onEditAvatar = (data: Record<string, unknown>) => {
-    const updatedContactsData: IContact[] = contactsCookieData.map(
-      (contato) => {
-        if (contato.id === Number(id)) {
-          const updatedContactData: IContact = {
-            ...contato,
-            cell: data.cell as string,
-          };
-          setContactData(updatedContactData);
-          return updatedContactData;
-        }
-        return contato;
+    const updatedContactsData: IContact[] = contactsCookie.map((contato) => {
+      if (contato.id === Number(id)) {
+        const updatedContactData: IContact = {
+          ...contato,
+          avatar: data.avatar as string,
+        };
+        setContactData(updatedContactData);
+        return updatedContactData;
       }
-    );
+      return contato;
+    });
 
     nookies.set(null, "contatos", JSON.stringify(updatedContactsData));
+    setIsEdit(false);
   };
 
   return (
@@ -103,7 +107,9 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
                 />
               )}
               {contactData.avatar === "" && (
-                <S.EditPagePersonNoImg avatarColor="#702121">
+                <S.EditPagePersonNoImg
+                  avatarColor={returnRandomBgColor(contactData.id)}
+                >
                   {contactData.name.charAt(0)}
                 </S.EditPagePersonNoImg>
               )}
@@ -147,11 +153,7 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
                         },
                       ]}
                       customBtn={
-                        <BaseButton
-                          variant="filled"
-                          color="#282843"
-                          onClick={() => setIsEdit(false)}
-                        >
+                        <BaseButton variant="filled" color="#282843">
                           Salvar
                         </BaseButton>
                       }
@@ -174,11 +176,7 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
                         },
                       ]}
                       customBtn={
-                        <BaseButton
-                          variant="filled"
-                          color="#282843"
-                          onClick={() => setIsEdit(false)}
-                        >
+                        <BaseButton variant="filled" color="#282843">
                           Salvar
                         </BaseButton>
                       }
@@ -201,11 +199,7 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
                         },
                       ]}
                       customBtn={
-                        <BaseButton
-                          variant="filled"
-                          color="#282843"
-                          onClick={() => setIsEdit(false)}
-                        >
+                        <BaseButton variant="filled" color="#282843">
                           Salvar
                         </BaseButton>
                       }

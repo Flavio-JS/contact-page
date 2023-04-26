@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContactList } from "../components/ContactList/ContactList";
 import { IContact } from "../components/ContactList/ContactList.types";
 import { Header } from "../components/Header/Header";
@@ -24,6 +24,10 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     "search"
   );
 
+  useEffect(() => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
+  }, [contactsData]);
+
   const onSearch = (data: { search?: string }) => {
     const filteredContacts = contactsCookie.filter((contact) => {
       const searchTerm = data.search?.toString().toLowerCase();
@@ -43,7 +47,6 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
       cell: data.cell as string,
       active: true,
     };
-    setContactsCookie(JSON.parse(nookies.get().contatos) as IContact[]);
     const newContactsData = [...contactsCookie, newContact];
     nookies.set(null, "contatos", JSON.stringify(newContactsData));
     setContactsData(newContactsData);
@@ -51,25 +54,21 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
   };
 
   const handleAddClick = () => {
-    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setContactsData(contactsCookie);
     setState("add");
     setEditMode(false);
   };
   const handleEditClick = () => {
-    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setContactsData(contactsCookie);
     setEditMode(true);
     setState("edit");
   };
   const handleDeleteClick = () => {
-    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setContactsData(contactsCookie);
     setState("delete");
     setEditMode(false);
   };
   const handleSearchClick = () => {
-    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setContactsData(contactsCookie);
     setState("search");
     setEditMode(false);
