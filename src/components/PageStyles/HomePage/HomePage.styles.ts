@@ -33,3 +33,9 @@ export const FormWrapper = styled.div`
     margin-bottom: 40px;
   }
 `;
+
+export const EditMessage = styled.div`
+  display: flex;
+  height: 76px;
+  text-align: center;
+`;

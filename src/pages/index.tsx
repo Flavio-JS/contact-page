@@ -4,22 +4,27 @@ import { useState } from "react";
 import { ContactList } from "../components/ContactList/ContactList";
 import { IContact } from "../components/ContactList/ContactList.types";
 import { Header } from "../components/Header/Header";
-import * as S from "../components/HomePage/index.styles";
+import * as S from "../components/PageStyles/HomePage/HomePage.styles";
 import { BaseButton } from "../components/BaseButton/BaseButton";
 import { Form } from "../components/Form/Form";
 import { SearchIcon } from "../components/Icons/Search/Search";
+import { Title } from "../components/Title/Title";
 
 type HomePageProps = {
   contactsCookieData: IContact[];
 };
 
 const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
-  let contactsCookie = contactsCookieData;
+  const cookies = nookies.get();
+  const [contactsCookie, setContactsCookie] = useState(contactsCookieData);
+  const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
+  const [editMode, setEditMode] = useState(false);
+
   const [state, setState] = useState<"search" | "add" | "edit" | "delete">(
     "search"
   );
-  const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
-  const onSearch = (data: Record<string, unknown>) => {
+
+  const onSearch = (data: { search?: string }) => {
     const filteredContacts = contactsCookie.filter((contact) => {
       const searchTerm = data.search?.toString().toLowerCase();
       return contact.name?.startsWith(
@@ -30,26 +35,44 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     setContactsData(filteredContacts);
   };
 
-  // eslint-disable-next-line no-console
   const onAdd = (data: Record<string, unknown>) => {
     const newContact: IContact = {
+      id: contactsCookie.length + 1,
       avatar: data.avatar as string,
       name: data.name as string,
       cell: data.cell as string,
+      active: true,
     };
-    contactsCookie = JSON.parse(nookies.get().contatos) as IContact[];
+    setContactsCookie(JSON.parse(nookies.get().contatos) as IContact[]);
     const newContactsData = [...contactsCookie, newContact];
     nookies.set(null, "contatos", JSON.stringify(newContactsData));
     setContactsData(newContactsData);
     setState("search");
   };
 
-  const handleAddClick = () => setState("add");
-  const handleEditClick = () => setState("edit");
-  const handleDeleteClick = () => setState("delete");
+  const handleAddClick = () => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
+    setContactsData(contactsCookie);
+    setState("add");
+    setEditMode(false);
+  };
+  const handleEditClick = () => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
+    setContactsData(contactsCookie);
+    setEditMode(true);
+    setState("edit");
+  };
+  const handleDeleteClick = () => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
+    setContactsData(contactsCookie);
+    setState("delete");
+    setEditMode(false);
+  };
   const handleSearchClick = () => {
+    setContactsCookie(JSON.parse(cookies.contatos) as IContact[]);
     setContactsData(contactsCookie);
     setState("search");
+    setEditMode(false);
   };
 
   return (
@@ -98,7 +121,7 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
                   name: "cell",
                   padding: "10px",
                   maxWidth: 350,
-                  placeholder: "(99)999999999",
+                  placeholder: "(99) 999999999",
                   regex: /^\(\d{2}\)\s\d{9}$/,
                   regexMessage:
                     "Digite um número de celular válido no formato (99) 999999999",
@@ -122,9 +145,14 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
               width={350}
             />
           )}
+          {state === "edit" && (
+            <S.EditMessage>
+              <Title fontSize={18}>Selecione o contato que deseja editar</Title>
+            </S.EditMessage>
+          )}
         </S.FormWrapper>
 
-        <ContactList contactsData={contactsData} />
+        <ContactList contactsData={contactsData} editMode={editMode} />
       </S.AppWrapper>
     </S.AppSection>
   );
