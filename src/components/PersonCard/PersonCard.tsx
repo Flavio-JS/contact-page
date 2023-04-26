@@ -1,15 +1,25 @@
 // import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import * as S from "./PersonCard.styles";
 
 interface IPersonCard {
+  id: number;
   name: string;
   cell: string;
   avatar: string;
   avatarColor: string;
+  editMode: boolean;
 }
 
-const PersonCard = ({ name, cell, avatar, avatarColor }: IPersonCard) => {
+const PersonCard = ({
+  id,
+  name,
+  cell,
+  avatar,
+  avatarColor,
+  editMode,
+}: IPersonCard) => {
   const [isClicked, setIsClicked] = useState(false);
   const [waitImg, setWaitImg] = useState(false);
   const transition = 500;
@@ -44,10 +54,22 @@ const PersonCard = ({ name, cell, avatar, avatarColor }: IPersonCard) => {
         )}
       </S.PersonCardImg>
       {!waitImg && (
-        <S.PersonCardInfo>
-          <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
-          <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
-        </S.PersonCardInfo>
+        <>
+          {!editMode && (
+            <S.PersonCardInfo>
+              <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
+              <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
+            </S.PersonCardInfo>
+          )}
+          {editMode && (
+            <Link href={`/edit/${id}`}>
+              <S.PersonCardInfo editMode={editMode}>
+                <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
+                <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
+              </S.PersonCardInfo>
+            </Link>
+          )}
+        </>
       )}
     </S.PersonCardWrapper>
   );
