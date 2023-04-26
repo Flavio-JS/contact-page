@@ -1,7 +1,8 @@
-// import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import nookies from "nookies";
 import * as S from "./PersonCard.styles";
+import { IContact } from "../ContactList/ContactList.types";
 
 interface IPersonCard {
   id: number;
@@ -10,6 +11,10 @@ interface IPersonCard {
   avatar: string;
   avatarColor: string;
   editMode: boolean;
+  deleteMode: boolean;
+  contactsData: IContact[];
+  setContactsData: Dispatch<SetStateAction<IContact[]>>;
+  setDeleteMode: Dispatch<SetStateAction<boolean>>;
 }
 
 const PersonCard = ({
@@ -19,6 +24,10 @@ const PersonCard = ({
   avatar,
   avatarColor,
   editMode,
+  deleteMode,
+  contactsData,
+  setContactsData,
+  setDeleteMode,
 }: IPersonCard) => {
   const [isClicked, setIsClicked] = useState(false);
   const [waitImg, setWaitImg] = useState(false);
@@ -34,6 +43,23 @@ const PersonCard = ({
         setWaitImg(false);
       }, transition);
     }
+  };
+
+  const [contactData, setContactData] = useState<IContact | undefined>(
+    contactsData.find((contato) => contato.id === Number(id))
+  );
+  useEffect(() => {
+    setDeleteMode(false);
+  }, [contactData]);
+
+  const onDelet = () => {
+    const updatedContactsData: IContact[] = contactsData.filter((contato) => {
+      return contato.id !== Number(id);
+    });
+
+    setContactData(undefined);
+    setContactsData(updatedContactsData);
+    nookies.set(null, "contatos", JSON.stringify(updatedContactsData));
   };
 
   return (
@@ -55,7 +81,7 @@ const PersonCard = ({
       </S.PersonCardImg>
       {!waitImg && (
         <>
-          {!editMode && (
+          {!editMode && !deleteMode && (
             <S.PersonCardInfo>
               <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
               <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
@@ -63,11 +89,17 @@ const PersonCard = ({
           )}
           {editMode && (
             <Link href={`/edit/${id}`}>
-              <S.PersonCardInfo editMode={editMode}>
+              <S.PersonCardInfo hoverMode={editMode}>
                 <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
                 <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
               </S.PersonCardInfo>
             </Link>
+          )}
+          {deleteMode && (
+            <S.PersonCardInfo hoverMode={deleteMode} onClick={() => onDelet()}>
+              <S.PersonCardInfoName>{name}</S.PersonCardInfoName>
+              <S.PersonCardInfoNumber>{cell}</S.PersonCardInfoNumber>
+            </S.PersonCardInfo>
           )}
         </>
       )}

@@ -55,13 +55,13 @@ export const PersonNoImg = styled.div<IPersonNoImg>`
 `;
 
 interface IPersonCardInfo {
-  editMode?: boolean;
+  hoverMode?: boolean;
 }
 export const PersonCardInfo = styled.div<IPersonCardInfo>`
-  ${({ editMode }) => css`
+  ${({ hoverMode }) => css`
     max-width: 127px;
 
-    cursor: ${editMode ? "pointer" : "default"};
+    cursor: ${hoverMode ? "pointer" : "default"};
   `}
 `;
 
