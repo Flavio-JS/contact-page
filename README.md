@@ -1,4 +1,4 @@
-# [Projeto #boraCodar - Desafio 16](https://www.rocketseat.com.br/boracodar#?utm_source=youtube&utm_medium=organic&utm_campaign=lead&utm_term=boracodar&utm_content=boracodar-descricao-BC_15_Jonas_UI)
+# [Projeto #boraCodar - Desafio 16](https://www.rocketseat.com.br/boracodar/desafios-anteriores/uma-pagina-de-contatos-desafio-16)
 
 Este é o meu projeto para o 16º desafio do projeto #boraCodar da Rocketseat.
 
