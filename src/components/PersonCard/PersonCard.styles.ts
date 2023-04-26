@@ -54,8 +54,15 @@ export const PersonNoImg = styled.div<IPersonNoImg>`
   `}
 `;
 
-export const PersonCardInfo = styled.div`
-  max-width: 127px;
+interface IPersonCardInfo {
+  editMode?: boolean;
+}
+export const PersonCardInfo = styled.div<IPersonCardInfo>`
+  ${({ editMode }) => css`
+    max-width: 127px;
+
+    cursor: ${editMode ? "pointer" : "default"};
+  `}
 `;
 
 export const PersonCardInfoName = styled.div`

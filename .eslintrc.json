@@ -15,7 +15,6 @@
     "plugin:prettier/recommended",
     "plugin:import/recommended",
     "plugin:storybook/recommended",
-    "plugin:jest/recommended",
     "plugin:@next/next/recommended"
   ],
   // Specifying Parser

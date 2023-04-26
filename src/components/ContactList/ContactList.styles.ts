@@ -5,7 +5,6 @@ export const ContactListWrapper = styled.div`
   width: 100%;
   max-width: 430px;
   height: 100%;
-  max-height: 50vh;
   padding: 40px;
   gap: 52px;
   overflow-y: scroll;
