@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ContactList } from "../components/ContactList/ContactList";
 import { IContact } from "../components/ContactList/ContactList.types";
 import { Header } from "../components/Header/Header";
-import * as S from "../components/PageStyles/index.styles";
+import * as S from "../components/PageStyles/HomePage/HomePage.styles";
 import { BaseButton } from "../components/BaseButton/BaseButton";
 import { Form } from "../components/Form/Form";
 import { SearchIcon } from "../components/Icons/Search/Search";
