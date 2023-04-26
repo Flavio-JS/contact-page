@@ -1,3 +1,4 @@
+import { returnRandomBgColor } from "../../utils/ReturnRandomBgColor";
 import { PersonCard } from "../PersonCard/PersonCard";
 import * as S from "./ContactList.styles";
 import { IContact } from "./ContactList.types";
@@ -23,23 +24,6 @@ const ContactList = ({ contactsData, editMode }: IContactList) => {
       ]
     : [];
 
-  function returnRandomBgColor(index: number) {
-    const bgColor = [
-      "#8C8CBA",
-      "#0088B3",
-      "#07847E",
-      "#633BBC",
-      "#9A00B3",
-      "#B38C00",
-    ];
-
-    if (index >= bgColor.length) {
-      return bgColor[index % bgColor.length];
-    }
-
-    return bgColor[index];
-  }
-
   return (
     <S.ContactListWrapper>
       {initials.length > 0 && contactsData !== undefined && (
@@ -54,7 +38,7 @@ const ContactList = ({ contactsData, editMode }: IContactList) => {
                   .filter((contact) => contact.name.startsWith(initial))
                   .map((contactData, contactIndex) => (
                     <PersonCard
-                      key={contactData.id}
+                      key={contactData?.id}
                       id={contactData.id}
                       avatar={contactData.avatar}
                       avatarColor={returnRandomBgColor(contactIndex + 4)}

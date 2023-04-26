@@ -26,8 +26,10 @@ export const EditPageContactInfos = styled.div`
 export const EditPagePersonImg = styled.div`
   img {
     border-radius: 50%;
-    max-width: 191px;
-    max-height: 191px;
+    min-width: 191px;
+    min-height: 191px;
+
+    background-color: red;
 
     :hover {
       cursor: pointer;
@@ -35,7 +37,15 @@ export const EditPagePersonImg = styled.div`
   }
 `;
 
-export const EditPagePersonNoImg = styled(PersonNoImg)``;
+export const EditPagePersonNoImg = styled(PersonNoImg)`
+  min-width: 191px;
+  min-height: 191px;
+  font-size: 64px;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
 
 export const EditPagePersonInfo = styled(PersonCardInfo)`
   display: flex;
