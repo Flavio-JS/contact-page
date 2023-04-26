@@ -88,8 +88,8 @@ const EditPage: NextPage<EditPageProps> = ({ contactsCookieData }) => {
   return (
     <S.EditPageSection>
       <S.EditPageWrapper>
-        {(!contactData || !contactData.active) && <h1>Não encontrado</h1>}
-        {contactData && contactData.active && (
+        {!contactData && <h1>Não encontrado</h1>}
+        {contactData && (
           <S.EditPageContactInfos>
             <S.EditPagePersonImg
               onClick={() => {
