@@ -19,6 +19,7 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
   const [contactsCookie, setContactsCookie] = useState(contactsCookieData);
   const [contactsData, setContactsData] = useState<IContact[]>(contactsCookie);
   const [editMode, setEditMode] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
 
   const [state, setState] = useState<"search" | "add" | "edit" | "delete">(
     "search"
@@ -57,23 +58,28 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
     setContactsData(contactsCookie);
     setState("add");
     setEditMode(false);
+    setDeleteMode(false);
   };
   const handleEditClick = () => {
     setContactsData(contactsCookie);
     setEditMode(true);
+    setDeleteMode(false);
     setState("edit");
   };
   const handleDeleteClick = () => {
     setContactsData(contactsCookie);
     setState("delete");
     setEditMode(false);
+    setDeleteMode(true);
   };
   const handleSearchClick = () => {
     setContactsData(contactsCookie);
     setState("search");
     setEditMode(false);
+    setDeleteMode(false);
   };
 
+  console.log(contactsCookie);
   return (
     <S.AppSection>
       <S.AppWrapper>
@@ -149,9 +155,23 @@ const HomePage: NextPage<HomePageProps> = ({ contactsCookieData }) => {
               <Title fontSize={18}>Selecione o contato que deseja editar</Title>
             </S.EditMessage>
           )}
+          {state === "delete" && (
+            <S.EditMessage>
+              <Title fontSize={18}>
+                Selecione o contato que deseja excluir
+              </Title>
+            </S.EditMessage>
+          )}
         </S.FormWrapper>
 
-        <ContactList contactsData={contactsData} editMode={editMode} />
+        <ContactList
+          contactsData={contactsData}
+          editMode={editMode}
+          deleteMode={deleteMode}
+          contactsCookie={contactsCookie}
+          setContactsCookie={setContactsCookie}
+          setDeleteMode={setDeleteMode}
+        />
       </S.AppWrapper>
     </S.AppSection>
   );
